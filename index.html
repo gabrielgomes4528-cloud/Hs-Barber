@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HS Barber | Barbearia Premium</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           DESIGN SYSTEM & VARIÁVEIS
+           ========================================== */
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-card: #141414;
+            --color-primary: #E31B23;
+            --color-accent: #FFD700;
+            --text-main: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --border-color: #222222;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        /* ==========================================
+           HEADER / NAVEGAÇÃO
+           ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active-link {
+            color: var(--color-accent);
+        }
+
+        .btn-agendar {
+            background-color: var(--color-primary);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-agendar:hover {
+            background-color: #c5141b;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           ESTRUTURA DE SEÇÕES (SPA)
+           ========================================== */
+        .section-page {
+            display: none;
+            padding-top: 100px;
+            min-height: 100vh;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .section-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==========================================
+           SEÇÃO HOME (HERO & DIFERENCIAIS)
+           ========================================== */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .hero h1 span {
+            color: var(--color-accent);
+            font-family: 'Yellowtail', cursive;
+            text-transform: none;
+            font-size: 0.8em;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--text-main);
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 60px;
+        }
+
+        .diff-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .diff-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+        }
+
+        .diff-card i {
+            font-size: 32px;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+        }
+
+        .diff-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .diff-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #141414, #1f1f1f);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--color-primary);
+            padding: 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .promo-content h3 {
+            font-size: 32px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .promo-content p {
+            color: var(--text-muted);
+        }
+
+        .promo-badge {
+            background-color: var(--color-accent);
+            color: var(--bg-primary);
+            font-family: 'Bebas Neue', sans-serif;
+            padding: 15px 25px;
+            font-size: 24px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================
+           SEÇÃO CARDÁPIO / SERVIÇOS
+           ========================================== */
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-size: 15px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+        }
+
+        .menu-img-container {
+            position: relative;
+            height: 200px;
+        }
+
+        .menu-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: var(--color-primary);
+            color: var(--text-main);
+            font-family: 'Bebas Neue', sans-serif;
+            padding: 5px 15px;
+            font-size: 20px;
+            border-radius: 4px;
+        }
+
+        .menu-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .menu-content h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .menu-content p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .btn-card {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px;
+            width: 100%;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .menu-card:hover .btn-card {
+            background-color: var(--color-accent);
+            color: var(--bg-primary);
+            border-color: var(--color-accent);
+        }
+
+        /* ==========================================
+           SEÇÃO SOBRE
+           ========================================== */
+        .about-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+        }
+
+        .about-img-wrapper img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+            height: 450px;
+            border: 1px solid var(--border-color);
+        }
+
+        .badge-since {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background-color: var(--color-accent);
+            color: var(--bg-primary);
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Bebas Neue', sans-serif;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border: 4px solid var(--bg-primary);
+        }
+
+        .badge-since span:first-child {
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .badge-since span:last-child {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .about-text h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-box h4 {
+            font-size: 28px;
+            color: var(--color-accent);
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* ==========================================
+           SEÇÃO LISTA DE VALORES
+           ========================================== */
+        .values-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .values-icon {
+            font-size: 40px;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .values-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-lg {
+            padding: 15px 30px;
+            font-size: 15px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: #FFFFFF;
+            border: none;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe5d;
+        }
+
+        .time-notice {
+            color: var(--text-muted);
+            font-size: 13px;
+            background: var(--bg-card);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ==========================================
+           SEÇÃO RESERVAS
+           ========================================== */
+        .reservation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .reservation-info h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .reservation-info p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .perks-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .perks-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .perks-list li i {
+            color: var(--color-accent);
+        }
+
+        .reservation-form {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            border-radius: 4px;
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            border-color: var(--color-accent);
+        }
+
+        /* ==========================================
+           SEÇÃO CONTATO
+           ========================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .contact-card i {
+            font-size: 28px;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .map-placeholder i {
+            font-size: 40px;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        /* ==========================================
+           FOOTER & BOTÃO FLUTUANTE WHATSAPP
+           ========================================== */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: var(--text-muted);
+            font-size: 18px;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: #FFFFFF;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1001;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* ==========================================
+           RESPONSIVIDADE
+           ========================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Poderia adicionar menu mobile se necessário */
+            }
+            .about-split, .reservation-grid {
+                grid-template-columns: 1fr;
+            }
+            .promo-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVEGAÇÃO -->
+    <header>
+        <a href="#home" onclick="mudarSecao('home')" class="logo">HS <span>BARBER</span></a>
+        <ul class="nav-links">
+            <li><a onclick="mudarSecao('home')" id="link-home" class="active-link">Home</a></li>
+            <li><a onclick="mudarSecao('cardapio')" id="link-cardapio">Cardápio</a></li>
+            <li><a onclick="mudarSecao('sobre')" id="link-sobre">Sobre</a></li>
+            <li><a onclick="mudarSecao('valores')" id="link-valores">Valores</a></li>
+            <li><a onclick="mudarSecao('reservas')" id="link-reservas">Reservas</a></li>
+            <li><a onclick="mudarSecao('contato')" id="link-contato">Contato</a></li>
+        </ul>
+        <button class="btn-agendar" onclick="mudarSecao('reservas')">Agendar Agora</button>
+    </header>
+
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <a href="https://whatsapp.com" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- SEÇÃO 1: HOME -->
+    <section id="home" class="section-page active">
+        <div class="hero">
+            <h1>Estilo Clássico <span>Atitude Moderna</span></h1>
+            <p>A experiência definitiva em barbearia gourmet. Cabelo, barba e cuidados de alto padrão em um ambiente exclusivo.</p>
+            <div class="hero-buttons">
+                <button class="btn-agendar" onclick="mudarSecao('reservas')">Reservar Horário</button>
+                <button class="btn-outline" onclick="mudarSecao('cardapio')">Ver Serviços</button>
+            </div>
+        </div>
+
+        <!-- Diferenciais -->
+        <div class="differentials-grid">
+            <div class="diff-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Pigmentação Premium</h3>
+                <p>Tecnologia avançada para cobertura de grisalhos e definição perfeita do contorno da barba.</p>
+            </div>
+            <div class="diff-card">
+                <i class="fas fa-cut"></i>
+                <h3>Régua Profissional</h3>
+                <p>Acabamento impecável com navalha afiada à mão e produtos específicos para o couro cabeludo.</p>
+            </div>
+            <div class="diff-card">
+                <i class="fas fa-glass-cheers"></i>
+                <h3>Experiência DOP</h3>
+                <p>Atendimento diferenciado com bebidas artesanais cortesia enquanto relaxa no nosso lounge.</p>
+            </div>
+        </div>
+
+        <!-- Banner Promocional -->
+        <div class="promo-banner">
+            <div class="promo-content">
+                <h3>Traga seu filho e ganhe 1 pirulito</h3>
+                <p>O corte pai e filho mais estiloso da cidade. Ambiente familiar e aconchegante para todas as idades.</p>
+            </div>
+            <div class="promo-badge">
+                <i class="fas fa-candy-cane"></i> Especial Kids
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: CARDÁPIO (SERVIÇOS) -->
+    <section id="cardapio" class="section-page">
+        <div class="container">
+            <h2 class="section-title">Cardápio de Serviços</h2>
+            <p class="section-subtitle">Escolha o seu tratamento e sinta a verdadeira essência de barbearia</p>
+            
+            <div class="menu-grid">
+                <!-- Card 1 -->
+                <div class="menu-card">
+                    <div class="menu-img-container">
+                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80" alt="Corte Clássico">
+                        <div class="price-tag">R$ 55,00</div>
+                    </div>
+                    <div class="menu-content">
+                        <div>
+                            <h3>Corte Clássico / Moderno</h3>
+                            <p>Corte executado com tesoura e máquina, lavagem capilar com shampoo refrescante e finalização.</p>
+                        </div>
+                        <button class="btn-card" onclick="mudarSecao('reservas')">Adicionar</button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="menu-card">
+                    <div class="menu-img-container">
+                        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80" alt="Barba Terapia">
+                        <div class="price-tag">R$ 45,00</div>
+                    </div>
+                    <div class="menu-content">
+                        <div>
+                            <h3>Barba Terapia</h3>
+                            <p>Toalha quente com essência de eucalipto, óleos hidratantes, navalha tradicional e balm relaxante.</p>
+                        </div>
+                        <button class="btn-card" onclick="mudarSecao('reservas')">Adicionar</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="menu-card">
+                    <div class="menu-img-container">
+                        <img src="https://images.unsplash.com/photo-1512864082104-51100523282b?auto=format&fit=crop&w=600&q=80" alt="Combo HS Barber">
+                        <div class="price-tag">R$ 90,00</div>
+                    </div>
+                    <div class="menu-content">
+                        <div>
+                            <h3>Combo HS Barber</h3>
+                            <p>O pacote completo: Corte de cabelo personalizado + Barba Terapia completa com bebidas inclusas.</p>
+                        </div>
+                        <button class="btn-card" onclick="mudarSecao('reservas')">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: SOBRE -->
+    <section id="sobre" class="section-page">
+        <div class="container">
+            <div class="about-split">
+                <div class="about-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" alt="Barbeiro profissional trabalhando">
+                    <div class="badge-since">
+                        <span>DESDE</span>
+                        <span>2016</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>Tradição e Modernidade Reunidas</h2>
+                    <p>Fundada em 2016, a HS Barber nasceu com o propósito de resgatar a essência das barbearias clássicas, integrando tendências modernas de visagismo e atendimento premium.</p>
+                    <p>Nossa equipe é formada por mestres da navalha altamente qualificados, prontos para entregar muito mais do que um corte: proporcionamos um momento de verdadeiro cuidado pessoal e descontração.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-box">
+                            <h4>+5k</h4>
+                            <p>Cortes Realizados</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>4.9</h4>
+                            <p>Avaliação Média</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 4: LISTA DE VALORES -->
+    <section id="valores" class="section-page">
+        <div class="container">
+            <div class="values-section">
+                <i class="fas fa-cut values-icon"></i>
+                <h2 class="section-title">Valores e Atendimento Direto</h2>
+                <p class="section-subtitle">Prefere agilizar o seu atendimento? Fale diretamente com a nossa central ou agende pelo sistema.</p>
+                
+                <div class="values-actions">
+                    <a href="https://whatsapp.com" target="_blank" class="btn-lg btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+                    </a>
+                    <button class="btn-lg btn-agendar" onclick="mudarSecao('reservas')">
+                        <i class="fas fa-calendar-alt"></i> Acessar Agenda
+                    </button>
+                </div>
+
+                <div class="time-notice">
+                    <i class="fas fa-clock"></i> Tempo médio de atendimento por procedimento: <strong>45 minutos</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 5: RESERVAS -->
+    <section id="reservas" class="section-page">
+        <div class="container">
+            <div class="reservation-grid">
+                <div class="reservation-info">
+                    <h2>Faça a sua Reserva</h2>
+                    <p>Garanta o seu horário com o seu profissional de preferência sem filas ou esperas. Desfrute de toda a nossa infraestrutura com comodidade.</p>
+                    
+                    <ul class="perks-list">
+                        <li><i class="fas fa-check-circle"></i> Confirmação instantânea via sistema e WhatsApp</li>
+                        <li><i class="fas fa-check-circle"></i> Bebidas de cortesia incluídas no atendimento</li>
+                        <li><i class="fas fa-check-circle"></i> Estacionamento gratuito exclusivo para clientes</li>
+                    </ul>
+                </div>
+                
+                <div class="reservation-form">
+                    <form onsubmit="event.preventDefault(); alert('Reserva solicitada com sucesso! Entraremos em contacto para confirmação.');">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" class="form-control" placeholder="Insira o seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="data-hora">Data e Hora</label>
+                            <input type="datetime-local" id="data-hora" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade de Pessoas</label>
+                            <input type="number" id="quantidade" class="form-control" min="1" max="5" value="1" required>
+                        </div>
+                        <button type="submit" class="btn-agendar" style="width: 100%; padding: 14px;">Confirmar Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 6: CONTATO -->
+    <section id="contato" class="section-page">
+        <div class="container">
+            <h2 class="section-title">Onde Estamos</h2>
+            <p class="section-subtitle">Visite o nosso espaço e viva a experiência HS Barber</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Endereço</h3>
+                    <p>Rua da Estética, 456 - Ala Premium<br>Centro - Cidade/SP</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Telefone</h3>
+                    <p>(11) 98765-4321<br>(11) 3333-4444</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horários</h3>
+                    <p>Segunda a Sábado: 09h às 20h<br>Domingos: Fechado</p>
+                </div>
+            </div>
+
+            <!-- Bloco simulação Google Maps -->
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map"></i>
+                    <p>Integração Google Maps - HS Barber</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <a href="#home" onclick="mudarSecao('home')" class="logo">HS <span>BARBER</span></a>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2026 HS Barber | Barbearia. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT DE Roteamento SPA -->
+    <script>
+        function mudarSecao(idSecao) {
+            // Ocultar todas as seções retirando a classe 'active'
+            const secoes = document.querySelectorAll('.section-page');
+            secoes.forEach(secao => {
+                secao.classList.remove('active');
+            });
+
+            // Mostrar a seção alvo adicionando a classe 'active'
+            const secaoAlvo = document.getElementById(idSecao);
+            if (secaoAlvo) {
+                secaoAlvo.classList.add('active');
+            }
+
+            // Atualizar classes ativas nos links do menu do header
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                link.classList.remove('active-link');
+            });
+
+            const linkAlvo = document.getElementById('link-' + idSecao);
+            if (linkAlvo) {
+                linkAlvo.classList.add('active-link');
+            }
+
+            // Rolar suavemente para o topo ao trocar de aba no SPA
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
